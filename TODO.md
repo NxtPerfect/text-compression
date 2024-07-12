@@ -5,5 +5,5 @@ Huffman Coding
     if in array, add +1 to frequency
     the array should be storing pairs of char + frequency
     - [x] sort the map by frequency descending
-    - [ ] create a prefix-free code to encode
+    - [/] create a prefix-free code to encode
     - [ ] save new compressed file
