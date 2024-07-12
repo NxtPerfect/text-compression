@@ -16,7 +16,6 @@ defmodule Compression do
     charList = content |> String.graphemes() |> Enum.reduce(%{}, fn char, acc -> 
       Map.put(acc, char, (acc[char] || 0) + 1)
     end) |> Enum.sort_by(fn {_k, v} -> v end, :desc)
-    IO.puts(charList)
   end
   def run(filePath, compressedPath) do
     %{size: size} = File.stat!(filePath)
