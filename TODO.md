@@ -6,4 +6,5 @@ Huffman Coding
     the array should be storing pairs of char + frequency
     - [x] sort the map by frequency descending
     - [/] create a prefix-free code to encode
+        - [ ] stuck at no match for right hand side value in compress
     - [ ] save new compressed file

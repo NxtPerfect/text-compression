@@ -37,20 +37,27 @@ defmodule Compression do
     compress(left, right, sum, rest)
   end
 
-  @spec compress(String, String, Number, Map) :: String
+  @spec compress(String, String, Number, List) :: String
   defp compress(leftNode, rightNode, sumPrev, charList) do
     IO.puts("Stage 2")
     IO.inspect(leftNode)
     IO.inspect(rightNode)
     IO.inspect(sumPrev)
     IO.inspect(charList)
-    [{char, occurance} | rest] = charList
-    [left, right, sum] = if occurance >= sumPrev do [char, [leftNode, rightNode], occurance + sumPrev] else [[leftNode, rightNode], char, occurance + sumPrev] end
-    compress(left, right, sum, rest)
+
+    if length(charList) == 1 do
+      [{char, occurance}] = charList
+      [left, right, sum] = if occurance >= sumPrev do [char, [leftNode, rightNode], occurance + sumPrev] else [[leftNode, rightNode], char, occurance + sumPrev] end
+      compress(left, right, sum)
+    else
+      [{char, occurance} | rest] = charList
+      [left, right, sum] = if occurance >= sumPrev do [char, [leftNode, rightNode], occurance + sumPrev] else [[leftNode, rightNode], char, occurance + sumPrev] end
+      compress(left, right, sum, rest)
+    end
   end
 
-  @spec compress(String, String, Number, Empty) :: String
-  defp compress(leftNode, rightNode, sumPrev, _) do
+  @spec compress(String, String, Number) :: String
+  defp compress(leftNode, rightNode, sumPrev) do
     # This function should now go through the list
     # and assign binary values
     # to each of the leafs
@@ -58,10 +65,22 @@ defmodule Compression do
     IO.inspect(leftNode)
     IO.inspect(rightNode)
     IO.inspect(sumPrev)
+    encode(leftNode, rightNode)
   end
 
-  defp encoding(tree) do
-    tree
+  defp encode(leftTree, rightTree) do
+    IO.puts("Stage 4, coding")
+    leftNumber = 0
+    [_ | restLeft] = leftTree
+    [_ | restRight] = rightTree
+    leftNumber = 01
+    rightNumber = 00
+    [leftTree, rightTree, leftNumber, rightNumber]
+    encode(leftTree, rightTree, leftNumber, rightNumber)
+  end
+
+  defp encode(leftTree, rightTree, lastNumberLeft, lastNumberRight) do
+    IO.puts("Stage 5, final coding")
   end
 
   @spec run(String, String) :: NoReturn
